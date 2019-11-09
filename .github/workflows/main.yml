@@ -21,6 +21,15 @@ jobs:
     - name: Setting up Vcpkg
       uses: dldt/setup-vcpkg@v1
       id: vcpkg
+    - name: Fixing artifacts on ubuntu
+      if: matrix.os =='ubuntu'
+      run: |
+        # workaround some case sensitivity issue with GitHub artifacts
+        # Make sure directory name is unique, case insensitive.
+        ls "${{ steps.vcpkg.outputs.export }}/installed/x64-linux/share/catch2/"
+        Move-Item -Path "${{ steps.vcpkg.outputs.export }}/installed/x64-linux/share/catch2/*" -Destination "${{ steps.vcpkg.outputs.export }}/installed/x64-linux/share/Catch2/"
+        Remove-Item -Recurse "${{ steps.vcpkg.outputs.export }}/installed/*/share/catch2/"
+      shell: pwsh
     - name: Uploading artifacts
       uses: actions/upload-artifact@v1
       with:
@@ -51,7 +60,7 @@ jobs:
         os: [ubuntu, windows, macOS]
     runs-on: ${{ matrix.os }}-latest
     steps:
-    - name: Install 7zip
+    - name: Install 7zip for macOS
       if: matrix.os == 'macOS'
       run: brew install p7zip
       shell: pwsh
