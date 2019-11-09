@@ -19,7 +19,7 @@ jobs:
       with:
         submodules: true
     - name: Setting up Vcpkg
-      uses: dldt/setup-vcpkg@v1.0.0
+      uses: dldt/setup-vcpkg@v1
       id: vcpkg
     - name: Uploading artifacts
       uses: actions/upload-artifact@v1
@@ -51,6 +51,10 @@ jobs:
         os: [ubuntu, windows, macOS]
     runs-on: ${{ matrix.os }}-latest
     steps:
+    - name: Install 7zip
+      if: matrix.os == 'macOS'
+      run: brew install p7zip
+      shell: pwsh
     - name: Getting release information
       id: get-release-info
       uses: dldt/get-release-info@v1.0.0
@@ -67,11 +71,7 @@ jobs:
       run: |
         $in = "${{ github.event.repository.name }}-${{ matrix.os }}-${{ steps.get-release-info.outputs.tag-name }}"
         $out = "$in.zip"
-        if ("${{ matrix.os }}" -Eq "windows") {
-          7z a $out $in
-        } else {
-          zip -9 -r $out $in
-        }
+        7z -mx9 a $out $in
       shell: pwsh
     - name: Uploading release assets
       uses: actions/upload-release-asset@v1.0.1
