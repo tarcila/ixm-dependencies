@@ -1,8 +1,8 @@
 packages = [
     'benchmark',
+    'catch2',
     'fmt',
     'glm',
-    'gtest',
     'ms-gsl',
     'nlohmann-json',
     'range-v3',
