@@ -21,7 +21,6 @@ jobs:
       run: |
         # workaround some case sensitivity issue with GitHub artifacts
         # Make sure directory name is unique, case insensitive.
-        ls "${{ steps.vcpkg.outputs.export }}/installed/x64-linux/share/catch2/"
         Move-Item -Path "${{ steps.vcpkg.outputs.export }}/installed/x64-linux/share/catch2/*" -Destination "${{ steps.vcpkg.outputs.export }}/installed/x64-linux/share/Catch2/"
         Remove-Item -Recurse "${{ steps.vcpkg.outputs.export }}/installed/*/share/catch2/"
       shell: pwsh
