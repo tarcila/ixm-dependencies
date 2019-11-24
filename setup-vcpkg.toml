@@ -1,4 +1,5 @@
 packages = [
+    'argparse',
     'benchmark',
     'catch2',
     'fmt',
@@ -6,6 +7,7 @@ packages = [
     'ms-gsl',
     'nlohmann-json',
     'range-v3',
+    'reproc',
     'spdlog',
     'tbb',
     'tinygltf',
