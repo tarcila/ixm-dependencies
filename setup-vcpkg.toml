@@ -7,6 +7,7 @@ packages = [
     'ms-gsl',
     'nlohmann-json',
     'range-v3',
+    'reproc',
     'spdlog',
     'tbb',
     'tinygltf',
