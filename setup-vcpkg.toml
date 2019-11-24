@@ -1,4 +1,5 @@
 packages = [
+    'argparse',
     'benchmark',
     'catch2',
     'fmt',
