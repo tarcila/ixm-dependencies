@@ -37,7 +37,7 @@ jobs:
     needs: [build]
     steps:
     - name: Creating release
-      uses: actions/create-release@v1.0.0
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -60,7 +60,7 @@ jobs:
       shell: pwsh
     - name: Getting release information
       id: get-release-info
-      uses: dldt/get-release-info@v1.0.0
+      uses: dldt/get-release-info@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -77,7 +77,7 @@ jobs:
         7z -mx9 a $out $in
       shell: pwsh
     - name: Uploading release assets
-      uses: actions/upload-release-asset@v1.0.1
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
